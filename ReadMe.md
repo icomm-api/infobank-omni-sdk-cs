@@ -204,8 +204,8 @@ catch (Exception ex)
 
 ## License / 라이선스
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-본 프로젝트는 MIT 라이선스로 배포됩니다. 자세한 내용은 LICENSE 파일을 참고하세요.
+This project is licensed under the Apache License 2.0 - see the LICENSE file for details.
+본 프로젝트는 Apache License 2.0으로 배포됩니다. 자세한 내용은 LICENSE 파일을 참고하세요.
 
 ## Contact / 문의
 
