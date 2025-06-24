@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "ms-vscode.vscode-json",
+        "editorconfig.editorconfig",
+        "ms-vscode.powershell",
+        "formulahendry.dotnet-test-explorer",
+        "kreativ-software.csharpextensions",
+        "ms-vscode.vscode-github-issue-notebooks"
+    ]
+} 

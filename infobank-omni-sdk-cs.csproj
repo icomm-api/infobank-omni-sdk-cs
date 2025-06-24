@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Infobank.Omni.Sdk.Cs</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+
+    <!-- NuGet Package Metadata -->
+    <PackageId>Infobank.Omni.Sdk.Cs</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Infobank</Authors>
+    <Company>Infobank</Company>
+    <Description>Infobank Omni SDK for .NET - A comprehensive SDK for sending various types of messages including SMS, MMS, AlimTalk, FriendTalk, RCS, and more.</Description>
+    <PackageTags>infobank;omni;sdk;messaging;sms;mms;alimtalk;friendtalk;rcs</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/your-username/infobank-omni-sdk-cs</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+
+    <!-- Build Configuration -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <!-- Assembly Information -->
+    <AssemblyTitle>Infobank Omni SDK</AssemblyTitle>
+    <AssemblyDescription>Infobank Omni SDK for .NET</AssemblyDescription>
+    <AssemblyCompany>Infobank</AssemblyCompany>
+    <AssemblyProduct>Infobank.Omni.Sdk.Cs</AssemblyProduct>
+    <AssemblyCopyright>Copyright © Infobank 2025</AssemblyCopyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <!-- Include README.md in the package -->
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+
+  <!-- Include source files from Infobank folder -->
+  <ItemGroup>
+    <Compile Include="Infobank/**/*.cs" />
+    <Compile Include="InfobankClient.cs" />
+  </ItemGroup>
+
+</Project>
