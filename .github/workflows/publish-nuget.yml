@@ -3,35 +3,53 @@ name: Publish NuGet Package
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
   workflow_dispatch:
 
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '8.0.x'
-        
-    - name: Restore dependencies
-      run: dotnet restore
-      
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-      
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-      
-    - name: Pack
-      run: dotnet pack --configuration Release --no-build --output ./nupkg
-      
-    - name: Publish to NuGet
-      run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
-      env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }} 
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Extract version from tag
+        id: version
+        run: |
+          # 태그에서 버전 추출 (v1.0.0 -> 1.0.0)
+          TAG_VERSION=${GITHUB_REF#refs/tags/}
+          VERSION=${TAG_VERSION#v}
+
+          echo "Tag: $TAG_VERSION"
+          echo "Version: $VERSION"
+
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag_version=$TAG_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Update version in csproj
+        run: |
+          # XML 파일에서 버전 업데이트
+          sed -i 's/<Version>.*<\/Version>/<Version>${{ steps.version.outputs.version }}<\/Version>/g' infobank-omni-sdk-cs.csproj
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+
+      - name: Pack
+        run: dotnet pack --configuration Release --no-build --output ./nupkg
+
+      - name: Publish to NuGet
+        run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
